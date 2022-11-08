@@ -1,19 +1,26 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Footer from './Footer';
 import CloseIcon from '@mui/icons-material/Close';
 import './Home.css'
 import Diary from './Images/diary.png'
 import plus from './Images/plus.png'
 import Navbar from './Navbar'
+import Note from './Note';
+import { allNotes } from './Slices';
 function Home() {
+  const dispatch = useDispatch();
+  const [edit, setEdit] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [create, setCreate] = useState(false);
   const [note, setNote] = useState({});
+  const [notes, setNotes] = useState([]);
   const user = useSelector((state)=>{return state.counter.user});
-  const getUser = () =>{
-    setCurrentUser(user);
+  const displayNotes = useSelector((state)=>{return state.counter.notes});
+  const getNotes = async() =>{
+    console.log(user._id);
+    await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
   }
   const handleChange = (e) =>{
     setNote({...note, [e.target.name]: e.target.value})
@@ -24,12 +31,15 @@ function Home() {
     console.log(note);
     await axios.post('/create', note);
   }
+  const handleEdit = async(e)=>{
+    await axios.put('/edit',{})
+  }
   useEffect(()=>{
-    getUser();
+    getNotes();
   },[]);
 
   return (
-    currentUser.email?<>
+    user.email?<>
     <Navbar/>
   <div className="main">
     <div className="content">
@@ -62,10 +72,34 @@ function Home() {
         </form>
         </div>
         </div></div>}
+    {edit&&<div className='createDiv'>
+      <div className='createNotes'>
+      <div className='Notes'>
+        <CloseIcon onClick={()=>{setEdit(false)}} style={{position:'absolute' ,right:'0', fontSize:'30px', cursor:'pointer'}}/>
+        <p className='notesInfo'>Edit A Note</p>
+        <form className='form' onChange={handleChange} onSubmit={handleSubmit}>
+          <div className='inputLabelsContainer'>
+          <label className='formInputLabel' htmlFor='title'>Title</label>
+          <input className='formInputs' type="text" name="title" placeholder='Title'></input>
+          <label className='formInputLabel' htmlFor='description'>Description</label>
+          <textarea className='formInputs' type="text" name="description" placeholder='Description' rows="5" cols="50"></textarea>
+          </div>
+          <div className='submitButton'>
+          <input type="submit" value="Edit"></input>
+          </div>
+        </form>
+        </div>
+        </div></div>}
       <div className="all-notes">
         <div className="note-div">
           <img src={plus} onClick={()=>{setCreate(true)}}/>
         </div>
+        {displayNotes.map((e)=>{
+          return(<>
+          <Note id={e._id} title={e.title} desc={e.description} userId={user._id}/>
+          </>
+          )
+        })}
       </div>
     </div>
     <div className="create-container">

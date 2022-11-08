@@ -44,7 +44,6 @@ app.post("/login", async (req, res) => {
   } else {
     console.log("No Such User Found");
   }
-  // await loginUser.save().then((e)=>{console.log("Successfully Registered")}).catch(e=>console.log(e));
 });
 app.post("/create", async (req, res) => {
   const noteFound = await noteSchema.findOne({ user: req.body.userId });
@@ -75,4 +74,30 @@ app.post("/create", async (req, res) => {
     (e) => console.log(e);
   }
 });
+app.post('/notes', async(req, res)=>{
+  const note = await noteSchema.findOne({user:req.body.userId});
+  if(note){
+    res.send(note);
+  }
+})
+app.put('/update', async(req, res)=>{
+  console.log(req.body);
+  await noteSchema.findOneAndUpdate(
+    {user: req.body.user},
+    {$set: {"notes.$[el].description": req.body.description ,
+           "notes.$[el].title": req.body.title} },
+    { 
+      arrayFilters: [{ "el._id": req.body.id }],
+      new: true
+    }
+  )
+})
+app.delete('/delete/:id/:user',async(req, res)=>{
+  const {id, user} = req.params;
+  console.log(req.params);
+  await noteSchema.updateOne(
+    {user: user},
+    { $pull: { notes: { _id: id } } }
+  )
+})
 app.listen(8000, console.log("Listening on port 8000"));
