@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   user: {},
+  notes:[],
+  deletedNotes:[]
 }
 const counterSlice = createSlice({
   name:'couter',
@@ -10,12 +12,18 @@ const counterSlice = createSlice({
     user(state, action){
       state.user = action.payload;
     },
-    decrement(state, action){
-      state.value = state.value-action.payload;
+    allNotes(state, action){
+      state.notes = action.payload;
+    },
+    createdNotes(state, action){
+      state.notes = state.notes.filter(x=>x._id!=action.payload);
+    },
+    deletedNotes(state, action){
+      state.deletedNotes = [...state.deletedNotes, action.payload];
     }
   }
 })
-export const {user, decrement} = counterSlice.actions;
+export const {user, allNotes, createdNotes, deletedNotes} = counterSlice.actions;
 export default counterSlice.reducer;
 // export const counterSlice = createSlice({
 //   name: 'counter',
