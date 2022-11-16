@@ -37,11 +37,21 @@ function Login() {
     }
   return (
     <div className='mainLogin'>
+      <p className='NotifyMain'>NOTIFY</p>
     <div className='mainLoginFormContainer'>
     <form className='mainLoginForm' onChange={handleChange} onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="Enter Email"></input>
-        <input type="text" name="password" placeholder="Enter Password"></input>
+      <p style={{fontSize:"30px", fontWeight:600}}>Sign In</p>
+      <div className='formInput'>
+      <p className='inputLabels'>Enter Email</p>
+        <input className='inputFields' type="text" name="email" placeholder="Enter Email"></input>
+        </div>
+        <div className='formInput'>
+        <p className='inputLabels'>Enter Password</p>
+        <input className='inputFields' type="text" name="password" placeholder="Enter Password"></input>
+        </div>
+        <div className='submitButton'>
         <input type="Submit" value="Login"></input>
+        </div>
     </form>
     </div>
     </div>

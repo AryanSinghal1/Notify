@@ -19,17 +19,33 @@ function Register() {
         }
     }
   return (
-    <div className='mainRegisterContainer'>
-    <div className='mainRegisterFormContainer'>
-    <form onChange={handleChange} onSubmit={handleSubmit} className='mainRegisterForm'>
-        <input type="text" name="Name" placeholder="Enter Name"></input>
-        <input type="text" name="Email" placeholder="Enter Email"></input>
-        <input type="text" name="Password" placeholder="Enter Password"></input>
-        <input type="text" name='CPassword' placeholder="Confirm Password"></input>
-        <input type="submit" value="Register"></input>
-    </form>
-    </div>
-    </div>
+    <div className='mainLogin'>
+    <p className='NotifyMain'>NOTIFY</p>
+  <div className='mainRegisterFormContainer'>
+  <form className='mainLoginForm' onChange={handleChange} onSubmit={handleSubmit}>
+    <p style={{fontSize:"30px", fontWeight:600}}>Register</p>
+    <div className='registerFormInput'>
+    <p className='inputLabels'>Enter Name</p>
+      <input className='inputFields' type="text" name="Name" placeholder="Enter Name"></input>
+      </div>
+      <div className='registerFormInput'>
+      <p className='inputLabels'>Enter Email</p>
+      <input type="text" className='inputFields' name="Email" placeholder="Enter Email"></input>
+      </div>
+      <div className='registerFormInput'>
+      <p className='inputLabels'>Enter Password</p>
+      <input type="text" className='inputFields' name="Password" placeholder="Enter Password"></input>
+      </div>
+      <div className='registerFormInput'>
+      <p className='inputLabels'>Re-Enter Password</p>
+      <input type="text" className='inputFields' name='CPassword' placeholder="Confirm Password"></input>
+        </div>
+      <div className='submitButton'>
+      <input type="Submit" value="Register"></input>
+      </div>
+  </form>
+  </div>
+  </div>
   )
 }
 

@@ -7,8 +7,20 @@
 }
 .mainRegisterFormContainer{
     width: 30%;
-    height: 60%;
-    background-color: aliceblue;
+    height: 80%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.registerFormInput{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .mainRegisterForm{
     width: 100%;

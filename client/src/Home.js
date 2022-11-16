@@ -39,7 +39,8 @@ function Home() {
   },[]);
 
   return (
-    user.email?<>
+    // user.email?
+    <>
     <Navbar/>
   <div className="main">
     <div className="content">
@@ -47,7 +48,7 @@ function Home() {
       <h1>Live Your Life A Hassle-Free Way</h1>
       <h2>Start by creating a Note</h2>
       <button className="btn">
-        <a href="#main-content">Click to create one</a>
+        <a href="#main-content" style={{color:"white"}}>Click to create one</a>
       </button>
     </div>
   </div>
@@ -149,7 +150,8 @@ function Home() {
     </div>
     </div>
     <Footer/>
-    </>:"NoLogin"
+    </>
+    // :"NoLogin"
     )
 }
 

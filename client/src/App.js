@@ -9,6 +9,7 @@ import Hello2 from './Hello2';
 import Navbar from './Navbar';
 import { Provider } from 'react-redux';
 import Store from './Store';
+import Scheduling from './Scheduling';
 function App() {
   return (
     <Provider store={Store}>
@@ -17,7 +18,8 @@ function App() {
       <Routes>
     <Route exact path='/' element={<Login/>}/>
     <Route exact path='/register' element={<Register/>}/>
-    <Route exact path='/home' element={<Home/>}/>
+    <Route exact path='/home' element={<Home/>}/> 
+    <Route exact path='/scheduling' element={<Scheduling/>}/> 
        </Routes>
      </div>
      </Router>
