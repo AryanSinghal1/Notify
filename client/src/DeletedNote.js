@@ -1,9 +1,10 @@
+import React from 'react'
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { deletedNotes } from './Slices';
 import './Note.css'
-function Note(props) {
+    function DeletedNote(props) {
     const dispatch = useDispatch();
     const [view, setView] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -23,7 +24,8 @@ function Note(props) {
         }
         dispatch(deletedNotes(note));
     }
-  return (<>
+  return (
+    <>
     <div className='notesCardMain' onClick={()=>{props.getIt(data)}}>
     <div className='notesCardMainContainer'>
     <div className='notesCardTitle'>
@@ -40,4 +42,4 @@ function Note(props) {
   )
 }
 
-export default Note;
+export default DeletedNote

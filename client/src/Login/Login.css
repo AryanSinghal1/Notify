@@ -1,17 +1,92 @@
-.mainLogin{
-    height: 100vh;
+.mainLoginContainer{
     width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.notifyMainPage{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.NotifyMain{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 10px;
+}
+.mainLoginFormContainer{
+    width: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.mainLoginFormContainer{
-    width: 30%;
-    height: 50%;
-    background-color: #fff;
-    box-shadow: 5px 5px 10px rgb(0,0,0, 0.5);
-}
 .mainLoginForm{
+    width: 25%;
+    height: 80%;
+    /* background-color: antiquewhite; */
+    border: 2px solid rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.signInText{
+    width: 90%;
+    height: 15%;
+    font-size: 30px;
+    font-weight: 600;   
+}
+.formInputContainer{
+    width: 90%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.formInput{
     width: 100%;
-    height: 100%;
+    height: 30%;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.submitButton{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.submitButton input{
+    margin-right: 20px;
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+.formInput input{
+    width: 90%;
+    padding: 10px 0;
+    /* border-radius: 10px; */
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+.registerUser{
+    height: 10%;
+    width: 90%;
+    /* background-color: antiquewhite; */
+    display: flex;
+    justify-content: center;
 }

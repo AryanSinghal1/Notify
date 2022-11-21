@@ -19,17 +19,42 @@ function Register() {
         }
     }
   return (
-    <div className='mainRegisterContainer'>
-    <div className='mainRegisterFormContainer'>
-    <form onChange={handleChange} onSubmit={handleSubmit} className='mainRegisterForm'>
-        <input type="text" name="Name" placeholder="Enter Name"></input>
-        <input type="text" name="Email" placeholder="Enter Email"></input>
-        <input type="text" name="Password" placeholder="Enter Password"></input>
-        <input type="text" name='CPassword' placeholder="Confirm Password"></input>
-        <input type="submit" value="Register"></input>
-    </form>
-    </div>
-    </div>
+    <div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
+    <p className='NotifyMain'>NOTIFY</p>
+      </div>
+  <div className='mainLoginFormContainer'>
+  <form className='mainRegisterForm' onChange={handleChange} onSubmit={handleSubmit}>
+  <div className='signInText'>
+    <p>Register</p>
+      </div>
+      <div className='loginformInputContainer'>
+    <div className='loginformInput'>
+    <p className='registerinputLabels'>Enter Name</p>
+      <input className='registerInputFields' type="text" name="Name" placeholder="Enter Name"></input>
+      </div>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Enter Email</p>
+      <input type="text" className='registerInputFields' name="Email" placeholder="Enter Email"></input>
+      </div>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Enter Password</p>
+      <input type="text" className='registerInputFields' name="Password" placeholder="Enter Password"></input>
+      </div>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Re-Enter Password</p>
+      <input type="text" className='registerInputFields' name='CPassword' placeholder="Confirm Password"></input>
+        </div>
+      <div className='submitButton'>
+      <input type="Submit" value="Register"></input>
+      </div>
+      </div>
+      <div className='loginUser'>
+        <p>Already Registered? <a href='/'>Login Here</a></p>
+      </div>
+  </form>
+  </div>
+  </div>
   )
 }
 

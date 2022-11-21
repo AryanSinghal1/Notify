@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   user: {},
   notes:[],
-  deletedNotes:[]
+  deletedNotes:[],
+  create: false,
+  edit: false
 }
 const counterSlice = createSlice({
   name:'couter',
@@ -20,10 +22,16 @@ const counterSlice = createSlice({
     },
     deletedNotes(state, action){
       state.deletedNotes = [...state.deletedNotes, action.payload];
-    }
+    },
+    createNotes(state,action){
+      state.create = action.payload;
+    },
+    editNotes(state,action){
+      state.edit = action.payload;
+    },
   }
 })
-export const {user, allNotes, createdNotes, deletedNotes} = counterSlice.actions;
+export const {user, allNotes, createdNotes, deletedNotes, createNotes, editNotes} = counterSlice.actions;
 export default counterSlice.reducer;
 // export const counterSlice = createSlice({
 //   name: 'counter',

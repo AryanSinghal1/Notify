@@ -29,6 +29,7 @@ function Login() {
         const thisdata = await e.json();
         console.log(thisdata.loginUser);
         dispatch(user(thisdata.loginUser));
+        localStorage.setItem("User",JSON.stringify(thisdata.loginUser));
         if(thisdata.token){
           navigate('/home');
         }
@@ -36,12 +37,31 @@ function Login() {
         setLoginUser({});
     }
   return (
-    <div className='mainLogin'>
+    <div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
+      <p className='NotifyMain'>NOTIFY</p>
+      </div>
     <div className='mainLoginFormContainer'>
     <form className='mainLoginForm' onChange={handleChange} onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="Enter Email"></input>
-        <input type="text" name="password" placeholder="Enter Password"></input>
+      <div className='signInText'>
+      <p>Sign In</p>
+      </div>
+      <div className='formInputContainer'>
+      <div className='formInput'>
+      <p className='inputLabels'>Enter Email</p>
+        <input className='inputFields' type="text" name="email" placeholder="Enter Email"></input>
+        </div>
+        <div className='formInput'>
+        <p className='inputLabels'>Enter Password</p>
+        <input className='inputFields' type="text" name="password" placeholder="Enter Password"></input>
+        </div>
+        <div className='submitButton'>
         <input type="Submit" value="Login"></input>
+        </div>
+        </div>
+    <div className='registerUser'>
+      <p>New to Notify? <a href='/register'>Register Here</a></p>
+    </div>
     </form>
     </div>
     </div>
