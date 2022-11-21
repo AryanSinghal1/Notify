@@ -1,0 +1,85 @@
+.createDiv{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.createNotesContainer{
+    width: 30%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    position: relative;
+}
+.createNotesDiv{
+    width: 90%;
+    height: 90%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: column;
+}
+.notesCreateInfoContainer{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    font-size: 25px;
+    font-weight: 600;
+    align-items: center;
+}
+.createForm{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.inputCreateLabelsContainer{
+    width: 100%;
+    height: 75%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.createButton{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.createNotesButton{
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 10px;
+}
+.formInputLabel{
+    font-size: 20px;
+    font-weight: 600;
+}
+.formInput1, .formInputs{
+    width: 90%;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    padding: 0 10px;
+}
+.formInput1{
+    height: 15%;
+}
+.formInputs{
+    padding: 10px;
+}

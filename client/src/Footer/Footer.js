@@ -1,12 +1,13 @@
 import React from 'react'
-import Insta from "./Images/instagram.png"
-import facebook from "./Images/facebook.png"
-import email from "./Images/email.png"
-import linkedin from "./Images/linkedin.png"
-import './Home.css'
+import Insta from "../Images/instagram.png"
+import facebook from "../Images/facebook.png"
+import email from "../Images/email.png"
+import linkedin from "../Images/linkedin.png"
+import './Footer.css'
 function Footer() {
   return (
-<div id="contact">
+<div id="contact" className='footerMain'>
+<div className='footerContainer'>
     <div className="about">
       <div className="about-name">
         <h1>NOTIFY</h1>
@@ -31,6 +32,7 @@ function Footer() {
     <div className="line">
       <p>Notes App &copy; 2021. All Rights Reserved.</p>
     </div>
+  </div>
   </div>
   )
 }

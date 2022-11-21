@@ -29,6 +29,7 @@ function Login() {
         const thisdata = await e.json();
         console.log(thisdata.loginUser);
         dispatch(user(thisdata.loginUser));
+        localStorage.setItem("User",JSON.stringify(thisdata.loginUser));
         if(thisdata.token){
           navigate('/home');
         }
@@ -36,11 +37,16 @@ function Login() {
         setLoginUser({});
     }
   return (
-    <div className='mainLogin'>
+    <div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
       <p className='NotifyMain'>NOTIFY</p>
+      </div>
     <div className='mainLoginFormContainer'>
     <form className='mainLoginForm' onChange={handleChange} onSubmit={handleSubmit}>
-      <p style={{fontSize:"30px", fontWeight:600}}>Sign In</p>
+      <div className='signInText'>
+      <p>Sign In</p>
+      </div>
+      <div className='formInputContainer'>
       <div className='formInput'>
       <p className='inputLabels'>Enter Email</p>
         <input className='inputFields' type="text" name="email" placeholder="Enter Email"></input>
@@ -52,6 +58,10 @@ function Login() {
         <div className='submitButton'>
         <input type="Submit" value="Login"></input>
         </div>
+        </div>
+    <div className='registerUser'>
+      <p>New to Notify? <a href='/register'>Register Here</a></p>
+    </div>
     </form>
     </div>
     </div>

@@ -19,29 +19,38 @@ function Register() {
         }
     }
   return (
-    <div className='mainLogin'>
+    <div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
     <p className='NotifyMain'>NOTIFY</p>
-  <div className='mainRegisterFormContainer'>
-  <form className='mainLoginForm' onChange={handleChange} onSubmit={handleSubmit}>
-    <p style={{fontSize:"30px", fontWeight:600}}>Register</p>
-    <div className='registerFormInput'>
-    <p className='inputLabels'>Enter Name</p>
-      <input className='inputFields' type="text" name="Name" placeholder="Enter Name"></input>
       </div>
-      <div className='registerFormInput'>
-      <p className='inputLabels'>Enter Email</p>
-      <input type="text" className='inputFields' name="Email" placeholder="Enter Email"></input>
+  <div className='mainLoginFormContainer'>
+  <form className='mainRegisterForm' onChange={handleChange} onSubmit={handleSubmit}>
+  <div className='signInText'>
+    <p>Register</p>
       </div>
-      <div className='registerFormInput'>
-      <p className='inputLabels'>Enter Password</p>
-      <input type="text" className='inputFields' name="Password" placeholder="Enter Password"></input>
+      <div className='loginformInputContainer'>
+    <div className='loginformInput'>
+    <p className='registerinputLabels'>Enter Name</p>
+      <input className='registerInputFields' type="text" name="Name" placeholder="Enter Name"></input>
       </div>
-      <div className='registerFormInput'>
-      <p className='inputLabels'>Re-Enter Password</p>
-      <input type="text" className='inputFields' name='CPassword' placeholder="Confirm Password"></input>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Enter Email</p>
+      <input type="text" className='registerInputFields' name="Email" placeholder="Enter Email"></input>
+      </div>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Enter Password</p>
+      <input type="text" className='registerInputFields' name="Password" placeholder="Enter Password"></input>
+      </div>
+      <div className='loginformInput'>
+      <p className='registerinputLabels'>Re-Enter Password</p>
+      <input type="text" className='registerInputFields' name='CPassword' placeholder="Confirm Password"></input>
         </div>
       <div className='submitButton'>
       <input type="Submit" value="Register"></input>
+      </div>
+      </div>
+      <div className='loginUser'>
+        <p>Already Registered? <a href='/'>Login Here</a></p>
       </div>
   </form>
   </div>
