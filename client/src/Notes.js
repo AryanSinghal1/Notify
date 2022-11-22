@@ -14,14 +14,17 @@ function Notes() {
     const dispatch = useDispatch();
     const [view, setView] = useState(false);
     const [noteData, setNoteData] = useState({});
+    const [currentNotes, setCurrentNotes] = useState([]);
     const create = useSelector((state)=>{return state.counter.create})
     const edit = useSelector((state)=>{return state.counter.edit});
-    console.log(edit);
   const user = useSelector((state)=>{return state.counter.user});
+  const trashNotes = useSelector((state)=>{return state.counter.deletedNotes});
   const displayNotes = useSelector((state)=>{return state.counter.notes});
   const getNotes = async() =>{
-    await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
-  }
+    await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{
+      dispatch(allNotes(e.data.notes));
+      setCurrentNotes(e.data.notes);
+})}
   useEffect(()=>{
     getNotes()
   },[])
@@ -34,9 +37,9 @@ function Notes() {
   }
   return (
     <div className='mainNotesPage'>
-        {create&&<CreateNote></CreateNote>}
-        {view&&<ViewNote view={noteView} desc={noteData.description} title={noteData.title} id={noteData._id}></ViewNote>}
-        {edit&&<EditNote></EditNote>}
+        {create&&<CreateNote notes={getNotes}></CreateNote>}
+        {view&&<ViewNote view={noteView} desc={noteData.description} title={noteData.title} id={noteData.id}></ViewNote>}
+        {edit&&<EditNote title={noteData.title} desc={noteData.description} id={noteData.id} data={getNotes}></EditNote>}
         <Navbar/>
         <div className='notesMainContainer'>
         <div className='notesMain'>

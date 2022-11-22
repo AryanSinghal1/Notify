@@ -44,6 +44,9 @@
     align-items: center;
     font-size: 20px;
 }
+.createPara{
+    cursor: pointer;
+}
 .searchNotes{
     width: 40%;
     height: 100%;

@@ -1,13 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import DeletedNote from '../DeletedNote'
 import Footer from '../Footer/Footer'
 import Navbar from '../Navbar/Navbar'
-import Note from '../Note'
 
 function Trash() {
     const trashNotes = useSelector((state)=>{return state.counter.deletedNotes})
     const user = useSelector((state)=>{return state.counter.user});
-    const getViewData = () =>{}
   return (
     <div className='mainNotesPage'>
         <Navbar/>
@@ -26,7 +25,7 @@ function Trash() {
                 {trashNotes?.map((e)=>{
           return(
           <>
-          <Note id={e._id} title={e.title} desc={e.description} userId={user._id} getIt={getViewData}/>
+          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id}/>
           </>
           )
         })}

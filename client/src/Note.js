@@ -5,12 +5,10 @@ import { deletedNotes } from './Slices';
 import './Note.css'
 function Note(props) {
     const dispatch = useDispatch();
-    const [view, setView] = useState(false);
-    const [edit, setEdit] = useState(false);
-    const [data, setData] = useState({title: props.title,description: props.desc, user: props.userId, id:props.id});
-    const handleChange = (e) =>{
-        setData({...data, [e.target.name]:e.target.value});
-    }
+    const data = {title: props.title,
+        description: props.desc,
+        user: props.userId,
+        id:props.id}
     const handleSubmit = async(e) =>{
         e.preventDefault();
         await axios.put('/update', data);

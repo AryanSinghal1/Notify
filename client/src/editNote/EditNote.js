@@ -5,19 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editNotes } from '../Slices';
 import './EditNote.css'
 
-function EditNote() {
+function EditNote({title, desc, id, data}) {
   const dispatch = useDispatch();
-  const [edit, setEdit] = useState(false);
-  const [note, setNote] = useState({});
+  const [note, setNote] = useState({title: title, description: desc});
   const user = useSelector((state)=>{return state.counter.user});
   const handleChange = (e) =>{
     setNote({...note, [e.target.name]: e.target.value})
   }
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    note.userId = user._id;
+    note.user = user._id;
+    note.id = id;
     console.log(note);
-    await axios.post('/create', note);
+    await axios.put('/update', note).then((e)=>{dispatch(editNotes(false));data()});
   }
   return (
     <div className='editDivContainer'>
@@ -30,9 +30,9 @@ function EditNote() {
         <form className='editForm' onChange={handleChange} onSubmit={handleSubmit}>
           <div className='editInputLabelsContainer'>
           <label className='formInputLabel' htmlFor='title'>Title</label>
-          <input className='formInputs' type="text" name="title" placeholder='Title'></input>
+          <input className='formInputs' value={note.title} type="text" name="title" placeholder='Title'></input>
           <label className='formInputLabel' htmlFor='description'>Description</label>
-          <textarea className='formInputs' type="text" name="description" placeholder='Description' rows="5" cols="50"></textarea>
+          <textarea className='formInputs' value={note.description} type="text" name="description" placeholder='Description' rows="5" cols="50"></textarea>
           </div>
           <div className='submitButton'>
           <input type="submit" value="Edit"></input>

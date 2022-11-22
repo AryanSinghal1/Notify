@@ -4,9 +4,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNotes } from '../Slices';
 import './CreateNote.css';
-function CreateNote() {
+function CreateNote(props) {
     const dispatch = useDispatch();
-    const [create, setCreate] = useState(false);
     const [note, setNote] = useState({});
   const user = useSelector((state)=>{return state.counter.user});
     const handleChange = (e) =>{
@@ -16,7 +15,9 @@ function CreateNote() {
         e.preventDefault();
         note.userId = user._id;
         console.log(note);
-        await axios.post('/create', note);
+        await axios.post('/create', note).then((e)=>{dispatch(createNotes(false));
+          props.notes();}).catch(e=>console.log(2));
+        
       }
   return (
     <div className='createDiv'>
