@@ -18,10 +18,14 @@ const counterSlice = createSlice({
       state.notes = action.payload;
     },
     createdNotes(state, action){
-      state.notes = state.notes.filter(x=>x._id!=action.payload);
+      state.notes = state.notes.filter(x=>x._id!==action.payload);
     },
     deletedNotes(state, action){
+      state.notes = state.notes.filter(x=>x._id!==action.payload._id);
       state.deletedNotes = [...state.deletedNotes, action.payload];
+    },
+    showTrash(state, action){
+      state.deletedNotes = state.deletedNotes.filter(x=>x._id!=action.payload);
     },
     createNotes(state,action){
       state.create = action.payload;
@@ -31,7 +35,7 @@ const counterSlice = createSlice({
     },
   }
 })
-export const {user, allNotes, createdNotes, deletedNotes, createNotes, editNotes} = counterSlice.actions;
+export const {user, allNotes, createdNotes, deletedNotes, createNotes, editNotes, showTrash} = counterSlice.actions;
 export default counterSlice.reducer;
 // export const counterSlice = createSlice({
 //   name: 'counter',

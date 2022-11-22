@@ -1,24 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Footer from './Footer/Footer';
-import CreateNote from './createNote/CreateNote';
 import './Home.css'
-import Diary from './Images/background.jpg'
-import plus from './Images/plus.png'
 import Navbar from './Navbar/Navbar'
-import Note from './Note';
-import { allNotes, createNotes } from './Slices';
-import EditNote from './editNote/EditNote';
+import { allNotes } from './Slices';
 import { Link } from 'react-router-dom';
 function Home() {
   const dispatch = useDispatch();
-  const create = useSelector((state)=>{return state.counter.create})
-  const edit = useSelector((state)=>{return state.counter.edit})
   const [note, setNote] = useState({});
-  // const user = useSelector((state)=>{return state.counter.user});
   const [user, setUser] = useState({});
-  const displayNotes = useSelector((state)=>{return state.counter.notes});
   const getNotes = async() =>{
     await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
   }
@@ -58,12 +49,6 @@ function Home() {
       </div>
       </div>
       </div>
-      {/* <img src={Diary} /> */}
-      {/* <h1>Live Your Life A Hassle-Free Way</h1>
-      <h2>Start by creating a Note</h2>
-      <button className="btn">
-        <a href="#main-content" style={{color:"white"}}>Click to create one</a>
-      </button> */}
     </div>
     <Footer/>
     </div>

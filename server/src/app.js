@@ -55,7 +55,7 @@ app.post("/create", async (req, res) => {
       });
       await noteFound
         .save()
-        .then((e) => console.log("Successfully Added"))
+        .then((e) => res.send("Successfully Added"))
         .catch((e) => console.log(e));
     } else {
       const note = new noteSchema({
@@ -67,7 +67,7 @@ app.post("/create", async (req, res) => {
       });
       await note
         .save()
-        .then((e) => console.log("Successfully Created"))
+        .then((e) => res.send("Successfully Created"))
         .catch((e) => console.log(e));
     }
   } catch {
@@ -90,14 +90,13 @@ app.put('/update', async(req, res)=>{
       arrayFilters: [{ "el._id": req.body.id }],
       new: true
     }
-  )
+  ).then(e=>res.send("Success")).catch(err=>console.log(err));
 })
-app.delete('/delete/:id/:user',async(req, res)=>{
-  const {id, user} = req.params;
-  console.log(req.params);
+app.post('/delete',async(req, res)=>{
+  const {id, user} = req.body;
   await noteSchema.updateOne(
     {user: user},
     { $pull: { notes: { _id: id } } }
-  )
+  ).then(e=>res.send("Success")).catch(err=>console.log(err));
 })
 app.listen(8000, console.log("Listening on port 8000"));

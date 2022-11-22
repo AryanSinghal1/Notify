@@ -7,11 +7,12 @@ function ViewNote({view, title, desc, id}) {
     const dispatch = useDispatch(); 
     const handleDelete = async()=>{
       const note = {
+        title: title,
           description: desc,
-          title: title,
           _id: id
       }
       dispatch(deletedNotes(note));
+      view(false);
   }
   return (
     <div className='viewDiv'>
