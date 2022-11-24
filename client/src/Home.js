@@ -9,10 +9,9 @@ import { Link } from 'react-router-dom';
 function Home() {
   const dispatch = useDispatch();
   const [note, setNote] = useState({});
+  const [noteArr, setNoteArr] = useState([]);
   const [user, setUser] = useState({});
-  const getNotes = async() =>{
-    await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
-  }
+  
   const handleChange = (e) =>{
     setNote({...note, [e.target.name]: e.target.value})
   }
@@ -22,15 +21,16 @@ function Home() {
     console.log(note);
     await axios.post('/create', note);
   }
+  console.log(noteArr);
   const handleEdit = async(e)=>{
     await axios.put('/edit',{})
   }
+  console.log(user);
   useEffect(()=>{
-    getNotes();
-    const currentUser = localStorage.getItem("User");
-    setUser(JSON.parse(currentUser));
+const user = localStorage.getItem("User");
+setUser(JSON.parse(user));
+    // getNotes();
   },[]);
-
   return (
     user?.email?
     <div className='mainHomePage'>
@@ -52,7 +52,14 @@ function Home() {
     </div>
     <Footer/>
     </div>
-    :"NoLogin"
+    :<div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
+      <p className='NotifyMain'>NOTIFY</p>
+      </div>
+      <div className='logoutMain'>
+        <p>You are not logged In. <Link to='/'>Login Here</Link></p>
+      </div>
+    </div>
     )
 }
 

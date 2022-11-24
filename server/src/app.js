@@ -25,6 +25,7 @@ app.post("/register", async (req, res) => {
 });
 app.post("/login", async (req, res) => {
   const loginUser = await userSchema.findOne({ email: req.body.email });
+  console.log(loginUser);
   if (loginUser) {
     const passwordMatch = await bcrypt.compare(
       req.body.password,
@@ -47,12 +48,15 @@ app.post("/login", async (req, res) => {
 });
 app.post("/create", async (req, res) => {
   const noteFound = await noteSchema.findOne({ user: req.body.userId });
+  console.log(noteFound);
+  console.log(req.body);
   try {
     if (noteFound) {
       noteFound.notes.push({
         title: req.body.title,
         description: req.body.description,
       });
+      console.log(noteFound);
       await noteFound
         .save()
         .then((e) => res.send("Successfully Added"))

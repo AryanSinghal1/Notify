@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import './Login.css'
-import {user} from '../Slices'
-import { useDispatch } from 'react-redux';
+import { LoginCheck } from '../auth';
+import {userLogin} from '../Slices'
+import { useDispatch, useSelector } from 'react-redux';
 function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
     const [loginUser, setLoginUser] = useState({});
-    const navigate = useNavigate();
+    const user = useSelector(state=>state.counter.user);
     const handleChange = (e)=>{
         let name = e.target.name;
         let value = e.target.value;
         setLoginUser({...loginUser, [name]:value})
     }
+    useEffect(()=>{
+      localStorage.removeItem("User");
+    })
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        // await axios.post("http://localhost:8000/login", loginUser).then(e=>console.log(e)).catch(e=>console.log(e));
-        await fetch("/login",{
+        console.log(loginUser);
+        fetch("/login",{
           method  :"POST",
           headers : {
               Accept : "application/json",
@@ -26,13 +31,12 @@ function Login() {
           ),
           credentials : 'include'
       }).then(async(e)=>{
-        const thisdata = await e.json();
-        console.log(thisdata.loginUser);
-        dispatch(user(thisdata.loginUser));
-        localStorage.setItem("User",JSON.stringify(thisdata.loginUser));
-        if(thisdata.token){
-          navigate('/home');
-        }
+          const thisdata = await e.json();
+          console.log(thisdata.loginUser);
+          if(thisdata.loginUser){
+              navigate('/home');
+            localStorage.setItem("User",JSON.stringify(thisdata.loginUser));
+          }
       })
         setLoginUser({});
     }
