@@ -30,7 +30,7 @@ const getAll = (e) =>{
                 </div>
             </div>
             
-                {search==''?trashNotes.length!=0?trashNotes.map((e)=>{
+                {search==''?trashNotes?.length!=0?trashNotes?.map((e)=>{
           return(
             <>
             <div className='notesContainerMain'>

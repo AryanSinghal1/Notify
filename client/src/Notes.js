@@ -29,7 +29,11 @@ function Notes(props) {
       const currentMyNotes = currentTrashNotes?e.data.notes.filter(x => currentTrashNotes?.every(x2 => x2._id !== x._id)):e.data.notes;
       setCurrentNotes(currentMyNotes);
       props.trashNotes(currentTrashNotes);
-      localStorage.setItem("trashNotes", JSON.stringify(currentTrashNotes));
+      if(currentTrashNotes){
+        localStorage.setItem("trashNotes", JSON.stringify(currentTrashNotes));
+      }else{
+        localStorage.setItem("trashNotes", JSON.stringify([]));
+      }
     })
   }
   useEffect(()=>{
@@ -38,6 +42,7 @@ function Notes(props) {
 
   const getDeletedNotes = (e) =>{
     currentTrashNotes?.push(e);
+    console.log(currentTrashNotes)
     getNotes();
   }
 
