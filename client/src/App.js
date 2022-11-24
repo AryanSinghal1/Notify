@@ -9,6 +9,7 @@ import Store from './Store';
 import Notes from './Notes';
 import Trash from './Trash/Trash';
 import { useState } from 'react';
+import Logout from './Logout';
 function App() {
   const [trashNotes, setTrashNotes] = useState([]);
   const getTrashNotes = (e) =>{
@@ -23,6 +24,7 @@ function App() {
     <Route exact path='/home' element={<Home/>}/> 
     <Route exact path='/notes' element={<Notes trashNotes = {getTrashNotes}/>}/>  
     <Route exact path='/trash' element={<Trash trash={trashNotes}/>}/> 
+    <Route exact path='/logout' element={<Logout/>}/> 
        </Routes>
      </Router>
      </Provider>

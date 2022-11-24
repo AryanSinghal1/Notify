@@ -13,6 +13,7 @@ function Navbar() {
       <a href="#contact">About Us</a>
       <a href="#contact">Contact Us</a>
       <Link to='/trash'>Trash</Link>
+      <Link to='/logout'>Logout</Link>
     </div>
   </div>
   </div>

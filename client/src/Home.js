@@ -52,7 +52,14 @@ setUser(JSON.parse(user));
     </div>
     <Footer/>
     </div>
-    :"NoLogin"
+    :<div className='mainLoginContainer'>
+      <div className='notifyMainPage'>
+      <p className='NotifyMain'>NOTIFY</p>
+      </div>
+      <div className='logoutMain'>
+        <p>You are not logged In. <Link to='/'>Login Here</Link></p>
+      </div>
+    </div>
     )
 }
 
