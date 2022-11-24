@@ -11,8 +11,8 @@ const counterSlice = createSlice({
   name:'couter',
   initialState,
   reducers:{
-    user(state, action){
-      state.user = action.payload;
+    userLogin(state, action){
+      
     },
     allNotes(state, action){
       state.notes = action.payload;
@@ -35,7 +35,7 @@ const counterSlice = createSlice({
     },
   }
 })
-export const {user, allNotes, createdNotes, deletedNotes, createNotes, editNotes, showTrash} = counterSlice.actions;
+export const {userLogin, allNotes, createdNotes, deletedNotes, createNotes, editNotes, showTrash} = counterSlice.actions;
 export default counterSlice.reducer;
 // export const counterSlice = createSlice({
 //   name: 'counter',

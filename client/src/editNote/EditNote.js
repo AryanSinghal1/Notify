@@ -8,7 +8,7 @@ import './EditNote.css'
 function EditNote({title, desc, id, data}) {
   const dispatch = useDispatch();
   const [note, setNote] = useState({title: title, description: desc});
-  const user = useSelector((state)=>{return state.counter.user});
+  const user = JSON.parse(localStorage.getItem("User"));
   const handleChange = (e) =>{
     setNote({...note, [e.target.name]: e.target.value})
   }
@@ -16,7 +16,6 @@ function EditNote({title, desc, id, data}) {
     e.preventDefault();
     note.user = user._id;
     note.id = id;
-    console.log(note);
     await axios.put('/update', note).then((e)=>{dispatch(editNotes(false));data()});
   }
   return (

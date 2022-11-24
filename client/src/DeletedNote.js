@@ -8,20 +8,23 @@ import './Note.css'
     function DeletedNote(props) {
     const dispatch = useDispatch();
     const [data, setData] = useState({title: props.title,description: props.desc, user: props.userId, id:props.id});
-    const user = useSelector((state)=>{return state.counter.user});
-    const handleChange = (e) =>{
-        setData({...data, [e.target.name]:e.target.value});
-    }
-    const handleSubmit = async(e) =>{
-        e.preventDefault();
-        await axios.put('/update', data);
-    }
+    const user = JSON.parse(localStorage.getItem("User"));
     const getNotes = async() =>{
         await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
-      }
+    }
+    const handleRestore = () => {
+        const currentTrash = JSON.parse(localStorage.getItem("trashNotes"));
+        const currentRestoreTrash = currentTrash.filter(x=>x._id!==props.id);
+        localStorage.setItem("trashNotes",JSON.stringify(currentRestoreTrash));
+        props.getIt(currentRestoreTrash);
+        window.location.reload();
+    }
     const handleDelete = async()=>{
         await axios.post('/delete',{user:user._id,id:props.id}).then(e=>getNotes());
-        dispatch(showTrash(props.id));
+        const currentTrash = JSON.parse(localStorage.getItem("trashNotes"));
+        const updatedTrash = currentTrash.filter(x=>x._id!==props.id);
+        localStorage.setItem("trashNotes",JSON.stringify(updatedTrash));
+        props.getIt(updatedTrash);
     }
   return (
     <>
@@ -34,7 +37,7 @@ import './Note.css'
     <p className='notesCardDescPara'>{props.desc}</p>
         </div>
         <div className='actionButtons'>
-            <button className='Button'>Restore</button>
+            <button className='Button' onClick={handleRestore}>Restore</button>
             <button className='Button' onClick={handleDelete}>Delete</button>
         </div>
     <div>

@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { deletedNotes, editNotes } from '../Slices';
 import './viewNote.css'
-function ViewNote({view, title, desc, id}) {
+function ViewNote({view, title, desc, id, deletedNotes}) {
     const dispatch = useDispatch(); 
     const handleDelete = async()=>{
       const note = {
@@ -11,7 +11,7 @@ function ViewNote({view, title, desc, id}) {
           description: desc,
           _id: id
       }
-      dispatch(deletedNotes(note));
+      deletedNotes(note);
       view(false);
   }
   return (

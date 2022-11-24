@@ -7,7 +7,7 @@ import './CreateNote.css';
 function CreateNote(props) {
     const dispatch = useDispatch();
     const [note, setNote] = useState({});
-  const user = useSelector((state)=>{return state.counter.user});
+  const user = JSON.parse(localStorage.getItem("User"));
     const handleChange = (e) =>{
         setNote({...note, [e.target.name]: e.target.value})
       }
