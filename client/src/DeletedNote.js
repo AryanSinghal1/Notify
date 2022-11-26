@@ -8,24 +8,21 @@ import './Note.css'
     function DeletedNote(props) {
     const dispatch = useDispatch();
     const [data, setData] = useState({title: props.title,description: props.desc, user: props.userId, id:props.id});
-    const user = JSON.parse(localStorage.getItem("User"));
+    const user = useSelector(state=>state.counter.user);
+    const currentTrash = useSelector(state=>state.counter.deletedNotes);
     const getNotes = async() =>{
         await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{dispatch(allNotes(e.data.notes));}).catch(e=>console.log(e));
     }
     const handleRestore = () => {
-        const currentTrash = JSON.parse(localStorage.getItem("trashNotes"));
         const currentRestoreTrash = currentTrash.filter(x=>x._id!==props.id);
-        localStorage.setItem("trashNotes",JSON.stringify(currentRestoreTrash));
-        props.getIt(currentRestoreTrash);
+        dispatch(deletedNotes(currentRestoreTrash));
         window.location.reload();
     }
     const handleDelete = async()=>{
         await axios.post('/delete',{user:user._id,id:props.id}).then(e=>getNotes());
-        const currentTrash = JSON.parse(localStorage.getItem("trashNotes"));
         const updatedTrash = currentTrash.filter(x=>x._id!==props.id);
-        localStorage.setItem("trashNotes",JSON.stringify(updatedTrash));
-        props.getIt(updatedTrash);
-    }
+        dispatch(deletedNotes(updatedTrash));
+        }
   return (
     <>
     <div className='notesCardMain' onClick={()=>{props.getIt(data)}}>

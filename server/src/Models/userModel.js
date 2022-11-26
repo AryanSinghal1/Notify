@@ -29,7 +29,7 @@ next();
 })
 userSchema.methods.generateAuthToken=async function(){
     try{
-            const token = jwt.sign({_id: this._id.toString()}, "Helloeveryonewelcometothecinelite")
+            const token = jwt.sign({_id: this._id.toString()}, "HelloeveryonewelcometoNotifyAppp")
             this.token = token;
             await this.save();
             return token;

@@ -5,14 +5,10 @@ import Footer from '../Footer/Footer'
 import Navbar from '../Navbar/Navbar'
 
 function Trash() {
-    const user = JSON.parse(localStorage.getItem("User"));
-    const currentTrash = JSON.parse(localStorage.getItem("trashNotes"));
-    const [trashNotes, setTrashNotes] = useState(currentTrash);
+    const user = useSelector(state=>state.counter.user);
+    const trashNotes = useSelector(state=>state.counter.deletedNotes);
     const [search, setSearch] = useState('');
     const totalSearchData = search!==''?trashNotes.filter(e=>e.title.toLowerCase().includes(search.toLowerCase())):'';
-    const getFunction = (e) =>{
-      setTrashNotes(Object.values(e));
-    }
 const getAll = (e) =>{
   console.log(e);
 }
@@ -30,23 +26,21 @@ const getAll = (e) =>{
                 </div>
             </div>
             
+            <div className='notesContainerMain'>
                 {search==''?trashNotes?.length!=0?trashNotes?.map((e)=>{
           return(
             <>
-            <div className='notesContainerMain'>
-          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getIt={getFunction} getAll={getAll}/>
-          </div>
+          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getAll={getAll}/>
           </>
           )
         }):<div className='noNotes'>No Trash</div>:totalSearchData?.map((e)=>{
           return(
             <>
-            <div className='notesContainerMain'>
-          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getIt={getFunction} getAll={getAll}/>
-            </div>
+          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getAll={getAll}/>
           </>
           )
         })}
+        </div>
         </div>
         </div>
         <Footer/>

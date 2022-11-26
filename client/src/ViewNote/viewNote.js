@@ -1,37 +1,35 @@
 import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
-import { deletedNotes, editNotes } from '../Slices';
+import { useDispatch, useSelector } from 'react-redux';
+import { editNotes, viewNotes } from '../Slices';
 import './viewNote.css'
-function ViewNote({view, title, desc, id, deletedNotes}) {
+function ViewNote({deletedNotes}) {
     const dispatch = useDispatch(); 
+    const currNote = useSelector(state=>state.counter.currentNote);
     const handleDelete = async()=>{
-      const note = {
-        title: title,
-          description: desc,
-          _id: id
-      }
-      deletedNotes(note);
-      view(false);
+      deletedNotes(currNote);
+      dispatch(viewNotes(false));
   }
   return (
     <div className='viewDiv'>
       <div className='createNotes'>
       <div className='Notes'>
-        <CloseIcon onClick={(e)=>{view(false);}} style={{position:'absolute' ,right:'10px',top:'10px', fontSize:'30px', cursor:'pointer'}}/>
+        <CloseIcon onClick={(e)=>{
+      dispatch(viewNotes(false));}} style={{position:'absolute' ,right:'10px',top:'10px', fontSize:'30px', cursor:'pointer'}}/>
         <div className='viewContainer'>
         <div className='view'>
           <div className='notesInfoContainer'>
           <div className='notesTitle'>
-          <p>{title}</p>
+          <p>{currNote.title}</p>
           </div>
           <div className='notesDesc'>
-          <p>{desc}</p>
+          <p>{currNote.description}</p>
           </div>
           </div>
           <div className='editNotes'>
           <button className='editNotesButton' onClick={(e)=>{handleDelete()}}>Delete</button>
-          <button className='editNotesButton' onClick={(e)=>{dispatch(editNotes(true));view(false)}}>Edit</button>
+          <button className='editNotesButton' onClick={(e)=>{dispatch(editNotes(true));
+      dispatch(viewNotes(false));}}>Edit</button>
           </div>
         </div>
         </div>

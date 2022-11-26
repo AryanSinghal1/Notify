@@ -7,17 +7,15 @@ import './CreateNote.css';
 function CreateNote(props) {
     const dispatch = useDispatch();
     const [note, setNote] = useState({});
-  const user = JSON.parse(localStorage.getItem("User"));
+    const user = useSelector(state=>state.counter.user);
     const handleChange = (e) =>{
         setNote({...note, [e.target.name]: e.target.value})
       }
       const handleSubmit = async(e) =>{
         e.preventDefault();
         note.userId = user._id;
-        console.log(note);
         await axios.post('/create', note).then((e)=>{dispatch(createNotes(false));
           props.notes();}).catch(e=>console.log(2));
-        
       }
   return (
     <div className='createDiv'>

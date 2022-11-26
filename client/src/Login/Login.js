@@ -8,18 +8,15 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
     const [loginUser, setLoginUser] = useState({});
-    const user = useSelector(state=>state.counter.user);
+    // const user = useSelector(state=>state.counter.user);
     const handleChange = (e)=>{
         let name = e.target.name;
         let value = e.target.value;
         setLoginUser({...loginUser, [name]:value})
     }
-    useEffect(()=>{
-      localStorage.removeItem("User");
-    })
+
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(loginUser);
         fetch("/login",{
           method  :"POST",
           headers : {
@@ -34,10 +31,10 @@ function Login() {
           const thisdata = await e.json();
           console.log(thisdata.loginUser);
           if(thisdata.loginUser){
+            dispatch(userLogin(thisdata.loginUser))
               navigate('/home');
-            localStorage.setItem("User",JSON.stringify(thisdata.loginUser));
-          }
-      })
+            }
+      }).catch(e=>console.log(e));
         setLoginUser({});
     }
   return (
@@ -57,10 +54,10 @@ function Login() {
         </div>
         <div className='formInput'>
         <p className='inputLabels'>Enter Password</p>
-        <input className='inputFields' type="text" name="password" placeholder="Enter Password"></input>
+        <input className='inputFields' type="password" name="password" placeholder="Enter Password"></input>
         </div>
         <div className='submitButton'>
-        <input type="Submit" value="Login"></input>
+        <input type="Submit" value="Login" onChange={()=>{}}></input>
         </div>
         </div>
     <div className='registerUser'>

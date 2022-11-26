@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './Register.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function Register() {
+  const navigate = useNavigate();
     const [user, setUser] = useState({});
     const handleChange = (e)=>{
         let name = e.target.name;
@@ -10,9 +12,9 @@ function Register() {
     }
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        if(user.CPassword==user.Password){
+        if(user.CPassword===user.Password){
             console.log(user);
-            await axios.post("http://localhost:8000/register", user).then(()=>{console.log("success")}).catch(e=>console.log(e));
+            await axios.post("http://localhost:8000/register", user).then(()=>{console.log("success"); navigate('/')}).catch(e=>console.log(e));
             setUser({});
         }else{
             alert("Wrong Password")
@@ -39,14 +41,14 @@ function Register() {
       </div>
       <div className='loginformInput'>
       <p className='registerinputLabels'>Enter Password</p>
-      <input type="text" className='registerInputFields' name="Password" placeholder="Enter Password"></input>
+      <input type="password" className='registerInputFields' name="Password" placeholder="Enter Password"></input>
       </div>
       <div className='loginformInput'>
       <p className='registerinputLabels'>Re-Enter Password</p>
       <input type="text" className='registerInputFields' name='CPassword' placeholder="Confirm Password"></input>
         </div>
       <div className='submitButton'>
-      <input type="Submit" value="Register"></input>
+      <input type="Submit" value="Register" onChange={()=>{}}></input>
       </div>
       </div>
       <div className='loginUser'>
