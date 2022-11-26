@@ -4,7 +4,10 @@ const cors = require("cors");
 const userSchema = require("./Models/userModel");
 const noteSchema = require("./Models/notesModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const cookieparser = require('cookie-parser');
 require("./connection/Connection");
+app.use(cookieparser())
 app.use(cors());
 app.use(express.json());
 app.get("/", (req, res) => {
@@ -19,13 +22,28 @@ app.post("/register", async (req, res) => {
   await user
     .save()
     .then((e) => {
-      console.log("Successfully Registered");
+      res.send("Successfully Registered");
     })
     .catch((e) => console.log(e));
 });
+app.get("/authenticate", async (req, res) => {
+  const token = req.cookies.jwtoken;
+  if(token){
+    const verify = jwt.verify(token,"HelloeveryonewelcometoNotifyAppp");
+    const user = await userSchema.findOne({_id:verify._id});
+    if(user){
+      res.json({user,message:'Welcome'});
+    }else{
+      console.log("Token Invalid");
+    }
+  }else{
+    console.log("Token not found");
+  }
+})
 app.post("/login", async (req, res) => {
   const loginUser = await userSchema.findOne({ email: req.body.email });
   console.log(loginUser);
+  console.log(req.body);
   if (loginUser) {
     const passwordMatch = await bcrypt.compare(
       req.body.password,
@@ -35,9 +53,10 @@ app.post("/login", async (req, res) => {
       const token = await loginUser.generateAuthToken();
       console.log("Logged In");
       res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 25892000),
+        // expires: new Date(Date.now() + 25892000),
         httpOnly: true,
       });
+      console.log(req.cookies);
       res.json({ loginUser, token });
     } else {
       console.log("Invalid Password");

@@ -1,17 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Footer from './Footer/Footer';
 import './Home.css'
 import Navbar from './Navbar/Navbar'
 import { allNotes } from './Slices';
 import { Link } from 'react-router-dom';
 function Home() {
-  const dispatch = useDispatch();
   const [note, setNote] = useState({});
   const [noteArr, setNoteArr] = useState([]);
-  const [user, setUser] = useState({});
-  
+  const user = useSelector(state=>state.counter.user);
   const handleChange = (e) =>{
     setNote({...note, [e.target.name]: e.target.value})
   }
@@ -21,16 +19,10 @@ function Home() {
     console.log(note);
     await axios.post('/create', note);
   }
-  console.log(noteArr);
   const handleEdit = async(e)=>{
     await axios.put('/edit',{})
   }
   console.log(user);
-  useEffect(()=>{
-const user = localStorage.getItem("User");
-setUser(JSON.parse(user));
-    // getNotes();
-  },[]);
   return (
     user?.email?
     <div className='mainHomePage'>

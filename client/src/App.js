@@ -4,30 +4,43 @@ import Home from './Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import Store from './Store';
 import Notes from './Notes';
 import Trash from './Trash/Trash';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Logout from './Logout';
+import { userLogin } from './Slices';
 function App() {
-  const [trashNotes, setTrashNotes] = useState([]);
-  const getTrashNotes = (e) =>{
-    setTrashNotes(e);
+  const dispatch = useDispatch();
+
+  const getData = () =>{
+    fetch("/authenticate",{
+      method  :"GET",
+      headers : {
+          Accept : "application/json",
+          "Content-Type" : "application/json"
+      },
+      credentials : 'include'
+  }).then(async(e)=>{
+      const thisdata = await e.json();
+      dispatch(userLogin(thisdata.user));
+  }).catch((e)=>console.log(e));
   }
+  useEffect(()=>{
+    getData();
+  },[])
   return (
-    <Provider store={Store}>
     <Router>
       <Routes>
     <Route exact path='/' element={<Login/>}/>
     <Route exact path='/register' element={<Register/>}/>
     <Route exact path='/home' element={<Home/>}/> 
-    <Route exact path='/notes' element={<Notes trashNotes = {getTrashNotes}/>}/>  
-    <Route exact path='/trash' element={<Trash trash={trashNotes}/>}/> 
+    <Route exact path='/notes' element={<Notes/>}/>  
+    <Route exact path='/trash' element={<Trash/>}/> 
     <Route exact path='/logout' element={<Logout/>}/> 
        </Routes>
      </Router>
-     </Provider>
   );
 }
 
