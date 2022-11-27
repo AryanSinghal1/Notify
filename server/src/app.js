@@ -115,6 +115,10 @@ app.put('/update', async(req, res)=>{
     }
   ).then(e=>res.send("Success")).catch(err=>console.log(err));
 })
+app.get('/logout', async(req, res)=>{
+  res.clearCookie("jwtoken");
+  res.send("Logged Out");
+})
 app.post('/delete',async(req, res)=>{
   const {id, user} = req.body;
   await noteSchema.updateOne(

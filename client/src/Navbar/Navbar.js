@@ -1,7 +1,12 @@
+import axios from 'axios';
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css';
 function Navbar() {
+  const navigate = useNavigate();
+  const logoutUser = async()=>{
+    await axios.get('/logout').then(e=>navigate('/logout')).catch(e=>console.log(e));
+  }
   return (
 <div className="MainNavbarContainer">
 <div className="MainNavbar">
@@ -13,7 +18,7 @@ function Navbar() {
       <a href="#contact">About Us</a>
       <a href="#contact">Contact Us</a>
       <Link to='/trash'>Trash</Link>
-      <Link to='/logout'>Logout</Link>
+      <Link onClick={()=>{logoutUser()}}>Logout</Link>
     </div>
   </div>
   </div>

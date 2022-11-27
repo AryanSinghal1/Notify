@@ -9,9 +9,6 @@ function Trash() {
     const trashNotes = useSelector(state=>state.counter.deletedNotes);
     const [search, setSearch] = useState('');
     const totalSearchData = search!==''?trashNotes.filter(e=>e.title.toLowerCase().includes(search.toLowerCase())):'';
-const getAll = (e) =>{
-  console.log(e);
-}
   return (
     <div className='mainNotesPage'>
         <Navbar/>
@@ -30,13 +27,13 @@ const getAll = (e) =>{
                 {search==''?trashNotes?.length!=0?trashNotes?.map((e)=>{
           return(
             <>
-          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getAll={getAll}/>
+          <DeletedNote _id={e._id} title={e.title} desc={e.description} userId={user._id}/>
           </>
           )
         }):<div className='noNotes'>No Trash</div>:totalSearchData?.map((e)=>{
           return(
             <>
-          <DeletedNote id={e._id} title={e.title} desc={e.description} userId={user._id} getAll={getAll}/>
+          <DeletedNote _id={e._id} title={e.title} desc={e.description} userId={user._id}/>
           </>
           )
         })}
