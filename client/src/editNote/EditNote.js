@@ -16,8 +16,8 @@ function EditNote({title, desc, id, data}) {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     updateNote.user = user._id;
-    updateNote.id = note._id;
-    await axios.put('/update', note).then((e)=>{dispatch(editNotes(false));data()});
+    updateNote.id = note.id;
+    await axios.put('/update', updateNote).then((e)=>{dispatch(editNotes(false));data()});
   }
   return (
     <div className='editDivContainer'>

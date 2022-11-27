@@ -8,7 +8,7 @@ import Navbar from './Navbar/Navbar'
 import Note from './Note'
 import ViewNote from './ViewNote/viewNote'
 import './Notes.css'
-import { createNotes, currentNote, deletedNotes } from './Slices'
+import { createNotes, currentNote, deletedNotes, viewNotes } from './Slices'
 import EditNote from './editNote/EditNote';
 function Notes() {
     const dispatch = useDispatch();
@@ -24,19 +24,21 @@ function Notes() {
       await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{
       const currentMyNotes = currentTrashNotes?e.data.notes.filter(x => currentTrashNotes?.every(x2 => x2._id !== x._id)):e.data.notes;
       setCurrentNotes(currentMyNotes);
-      dispatch(deletedNotes(currentTrashNotes));
+      // dispatch(deletedNotes(currentTrashNotes));
     })
   }
   getNotes();
 
   const getDeletedNotes = (e) =>{
-    currentTrashNotes?.push(e);
-    console.log(currentTrashNotes)
+    // currentTrashNotes?.push(e);
+    dispatch(deletedNotes(e));
+    // console.log(currentTrashNotes)
     getNotes();
   }
 
   const getViewData = (e) =>{
     dispatch(currentNote(e));
+    dispatch(viewNotes(true));
   }
   return (
     <div className='mainNotesPage'>

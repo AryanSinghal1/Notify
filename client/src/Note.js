@@ -8,7 +8,7 @@ function Note(props) {
     const data = {title: props.title,
         description: props.desc,
         user: props.userId,
-        id:props.id}
+        _id:props.id}
     const handleSubmit = async(e) =>{
         e.preventDefault();
         await axios.put('/update', data);
