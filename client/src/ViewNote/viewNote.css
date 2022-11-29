@@ -21,6 +21,7 @@
     border-radius: 20px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 .viewContainer{
     width: 100%;

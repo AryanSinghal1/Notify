@@ -103,12 +103,36 @@ app.post('/notes', async(req, res)=>{
     res.send(note);
   }
 })
-app.put('/update', async(req, res)=>{
+app.put('/favNote', async(req, res)=>{
   console.log(req.body);
   await noteSchema.findOneAndUpdate(
     {user: req.body.user},
+    {$set: {"notes.$[el].favorite": true} },
+    { 
+      arrayFilters: [{ "el._id": req.body._id }],
+      new: true
+    }
+  ).then(e=>res.send("Success")).catch(err=>console.log(err));
+})
+app.put('/remFavNote', async(req, res)=>{
+  console.log(req.body);
+  await noteSchema.findOneAndUpdate(
+    {user: req.body.user},
+    {$set: {"notes.$[el].favorite": false} },
+    { 
+      arrayFilters: [{ "el._id": req.body._id }],
+      new: true
+    }
+  ).then(e=>res.send("Success")).catch(err=>console.log(err));
+})
+app.put('/update', async(req, res)=>{
+  console.log(req.body);
+  const currentTime = new Date();
+  await noteSchema.findOneAndUpdate(
+    {user: req.body.user},
     {$set: {"notes.$[el].description": req.body.description ,
-           "notes.$[el].title": req.body.title} },
+           "notes.$[el].title": req.body.title,
+          "notes.$[el].date": currentTime} },
     { 
       arrayFilters: [{ "el._id": req.body.id }],
       new: true

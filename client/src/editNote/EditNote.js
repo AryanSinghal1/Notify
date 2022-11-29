@@ -16,7 +16,8 @@ function EditNote({title, desc, id, data}) {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     updateNote.user = user._id;
-    updateNote.id = note.id;
+    updateNote.id = note._id;
+    console.log(updateNote);
     await axios.put('/update', updateNote).then((e)=>{dispatch(editNotes(false));data()});
   }
   return (
@@ -35,7 +36,7 @@ function EditNote({title, desc, id, data}) {
           <textarea className='formInputs' value={updateNote.description} type="text" name="description" placeholder='Description' rows="5" cols="50"></textarea>
           </div>
           <div className='submitButton'>
-          <input type="submit" value="Edit"></input>
+          <input type="submit" value="Save"></input>
           </div>
         </form>
         </div>

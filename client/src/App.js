@@ -11,6 +11,7 @@ import Trash from './Trash/Trash';
 import { useEffect, useState } from 'react';
 import Logout from './Logout';
 import { userLogin } from './Slices';
+import Starred from './Starred/Starred';
 function App() {
   const dispatch = useDispatch();
 
@@ -38,6 +39,7 @@ function App() {
     <Route exact path='/home' element={<Home/>}/> 
     <Route exact path='/notes' element={<Notes/>}/>  
     <Route exact path='/trash' element={<Trash/>}/> 
+    <Route exact path='/starred' element={<Starred/>}/> 
     <Route exact path='/logout' element={<Logout/>}/> 
        </Routes>
      </Router>

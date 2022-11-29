@@ -15,7 +15,7 @@ function Navbar() {
   </div>
     <div className="links">
       <Link to="/notes">My Notes</Link>
-      <a href="#contact">About Us</a>
+      <Link to='/starred'>Starred</Link>
       <a href="#contact">Contact Us</a>
       <Link to='/trash'>Trash</Link>
       <Link onClick={()=>{logoutUser()}}>Logout</Link>
