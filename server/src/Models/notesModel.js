@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const currentDate = new Date();
 const notesSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
@@ -10,8 +11,17 @@ const notesSchema = new mongoose.Schema({
         },
         description:{
             type:String
+        },
+        date:{
+            type:String,
+            default: currentDate
+        },
+        favorite:{
+            type:Boolean,
+            default:false
         }
-    }]
+    }],
+
 })
 const notes = new mongoose.model('note', notesSchema);
 module.exports = notes;

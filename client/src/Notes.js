@@ -8,7 +8,7 @@ import Navbar from './Navbar/Navbar'
 import Note from './Note'
 import ViewNote from './ViewNote/viewNote'
 import './Notes.css'
-import { createNotes, currentNote, deletedNotes, viewNotes } from './Slices'
+import { allNotes, createNotes, currentNote, deletedNotes, viewNotes } from './Slices'
 import EditNote from './editNote/EditNote';
 function Notes() {
     const dispatch = useDispatch();
@@ -24,15 +24,13 @@ function Notes() {
       await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{
       const currentMyNotes = currentTrashNotes?e.data.notes.filter(x => currentTrashNotes?.every(x2 => x2._id !== x._id)):e.data.notes;
       setCurrentNotes(currentMyNotes);
-      // dispatch(deletedNotes(currentTrashNotes));
+      dispatch(allNotes(currentMyNotes));
     })
   }
   getNotes();
 
   const getDeletedNotes = (e) =>{
-    // currentTrashNotes?.push(e);
     dispatch(deletedNotes(e));
-    // console.log(currentTrashNotes)
     getNotes();
   }
 
@@ -63,7 +61,7 @@ function Notes() {
                 {search==''?currentNotes.length!=0?currentNotes.map((e)=>{
                   return(
                     <>
-          <Note id={e._id} title={e.title} desc={e.description} userId={user._id} getIt={getViewData}/>
+          <Note id={e._id} title={e.title} desc={e.description} date={e.date} fav={e.favorite} userId={user._id} getIt={getViewData}/>
           </>
           )
         }
