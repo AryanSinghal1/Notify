@@ -1,0 +1,50 @@
+.myProfileText{
+    font-size: 30px;
+    font-weight: 500;
+}
+.profileContainerMain{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profileContainer{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.currentProfile{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.updateProfile{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profileImage{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid black;
+}
+.profileName{
+    font-size: 25px;
+}
+.mainProfileForm{
+    width: 90%;
+    height: 100%;
+}
+.profileImage img{
+    width: 100%;
+    height: 100%;
+}

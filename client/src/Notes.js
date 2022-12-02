@@ -25,15 +25,12 @@ function Notes() {
       const currentMyNotes = currentTrashNotes?e.data.notes.filter(x => currentTrashNotes?.every(x2 => x2._id !== x._id)):e.data.notes;
       setCurrentNotes(currentMyNotes);
       dispatch(allNotes(currentMyNotes));
-      // dispatch(deletedNotes(currentTrashNotes));
     })
   }
   getNotes();
 
   const getDeletedNotes = (e) =>{
-    // currentTrashNotes?.push(e);
     dispatch(deletedNotes(e));
-    // console.log(currentTrashNotes)
     getNotes();
   }
 

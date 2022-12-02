@@ -9,7 +9,7 @@ const cookieparser = require('cookie-parser');
 require("./connection/Connection");
 app.use(cookieparser())
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: "50mb"}));
 app.get("/", (req, res) => {
   res.send("Hello");
 });
@@ -114,6 +114,17 @@ app.put('/favNote', async(req, res)=>{
     }
   ).then(e=>res.send("Success")).catch(err=>console.log(err));
 })
+app.put('/updateUser', async(req, res)=>{
+  console.log(req.body);
+  const currentUser = await userSchema.findOne({email:req.body.email});
+  if(currentUser){
+    currentUser.name=req.body.name;
+    currentUser.photo = req.body.photo;
+    currentUser.password = req.body.password;
+  }
+  await currentUser.save().then(e=>res.send("Success")).catch(e=>console.log(e));
+    // password:password,
+});
 app.put('/remFavNote', async(req, res)=>{
   console.log(req.body);
   await noteSchema.findOneAndUpdate(

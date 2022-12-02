@@ -16,6 +16,7 @@
     background-color: #fff;
     border-radius: 20px;
     position: relative;
+    z-index: 1;
 }
 .createNotesDiv{
     width: 90%;

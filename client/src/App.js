@@ -4,14 +4,14 @@ import Home from './Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { Provider, useDispatch } from 'react-redux';
-import Store from './Store';
+import { useDispatch } from 'react-redux';
 import Notes from './Notes';
 import Trash from './Trash/Trash';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Logout from './Logout';
 import { userLogin } from './Slices';
 import Starred from './Starred/Starred';
+import Profile from './Profile/Profile';
 function App() {
   const dispatch = useDispatch();
 
@@ -41,6 +41,7 @@ function App() {
     <Route exact path='/trash' element={<Trash/>}/> 
     <Route exact path='/starred' element={<Starred/>}/> 
     <Route exact path='/logout' element={<Logout/>}/> 
+    <Route exact path='/profile' element={<Profile/>}/> 
        </Routes>
      </Router>
   );

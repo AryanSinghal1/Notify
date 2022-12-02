@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import StarIcon from '@mui/icons-material/Star';
-import { deletedNotes } from './Slices';
+import { allNotes, deletedNotes, viewNotes } from './Slices';
 import './Note.css'
 function Note(props) {
     const dispatch = useDispatch();
+    const currentTrashNotes = useSelector(state=>state.counter.deletedNotes);
     const user = useSelector(state=>state.counter.user);
     const data = {title: props.title,
         description: props.desc,
@@ -31,14 +32,20 @@ function Note(props) {
                 user: user._id,
                 _id: props.id
             }
-              await axios.put('/favNote', noteFav).then((e)=>{})
+              await axios.put('/favNote', noteFav).then((e)=>{});
+              dispatch(viewNotes(false));
             }
-        const remFavorite = async() =>{
-            const noteFav = {
-                user: user._id,
-                _id: props.id
-            }
-              await axios.put('/remFavNote', noteFav).then((e)=>{})
+            const remFavorite = async() =>{
+                const noteFav = {
+                    user: user._id,
+                    _id: props.id
+                }
+                await axios.put('/remFavNote', noteFav).then(async(e)=>{  
+                    await axios.post('http://localhost:8000/notes', {"userId":user._id}).then(e=>{
+                      const currentMyNotes = currentTrashNotes?e.data.notes.filter(x => currentTrashNotes?.every(x2 => x2._id !== x._id)):e.data.notes;
+                      dispatch(allNotes(currentMyNotes));
+                    })})
+                dispatch(viewNotes(false));
             }
             
         return (<>
@@ -50,7 +57,7 @@ function Note(props) {
             <p style={{fontSize:"10px"}}>{date}</p>
         </div>
         <div className='notesCardDesc'>
-            <div className='tagButton'><p>Hello</p></div>
+            {/* <div className='tagButton'><p>Hello</p></div> */}
     <p className='notesCardDescPara'>{props.desc}</p>
         </div>
     <div>
